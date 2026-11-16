@@ -1,0 +1,60 @@
+<div class="page">
+  <div #map class="map"></div>
+
+  <header class="topbar">
+    <span class="brand">Parkly</span>
+    <span class="user">{{ auth.user()?.email }}</span>
+    <button type="button" class="link" (click)="logout()">Odjava</button>
+  </header>
+
+  @if (!searchOpen()) {
+    <button type="button" class="fab" (click)="openSearch()">
+      <span class="fab-icon">P</span>
+      Izberi parking
+    </button>
+  } @else {
+    <form class="search" (ngSubmit)="search()">
+      <div class="row">
+        <input
+          #placeInput
+          type="search"
+          name="place"
+          [(ngModel)]="place"
+          placeholder="Kam greš? (npr. Ljubljana, Prešernov trg)"
+          autocomplete="off"
+        />
+        <button type="button" class="close" (click)="closeSearch()" aria-label="Zapri iskanje">✕</button>
+      </div>
+      <div class="row">
+        <label>Od <input type="datetime-local" name="from" step="900" [(ngModel)]="from" /></label>
+        <label>Do <input type="datetime-local" name="to" step="900" [(ngModel)]="to" /></label>
+      </div>
+      <button type="submit" [disabled]="loading()">{{ loading() ? 'Iščem…' : 'Išči (Enter)' }}</button>
+      @if (error()) {
+        <p class="error">{{ error() }}</p>
+      }
+    </form>
+  }
+
+  @if (results().length) {
+    <section class="results">
+      <h2>Prosta mesta v bližini</h2>
+      <ul>
+        @for (spot of results(); track spot.id) {
+          <li>
+            <button type="button" class="spot" [class.selected]="selectedId() === spot.id" (click)="select(spot.id)">
+              <span class="info">
+                <strong>{{ spot.title }}</strong>
+                <small>{{ spot.distanceM }} m od cilja</small>
+              </span>
+              <span class="price">
+                <strong>{{ eur(spot.pricePerHour) }}/h</strong>
+                <small>skupaj {{ eur(spot.totalPrice) }}</small>
+              </span>
+            </button>
+          </li>
+        }
+      </ul>
+    </section>
+  }
+</div>

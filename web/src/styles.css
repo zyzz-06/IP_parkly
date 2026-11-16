@@ -1,0 +1,99 @@
+:root {
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --text: #0f172a;
+  --muted: #64748b;
+  --border: #cbd5e1;
+  --shadow: 0 8px 24px rgb(15 23 42 / 0.18);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color: var(--text);
+}
+
+input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font: inherit;
+  font-weight: 400;
+  color: var(--text);
+}
+
+input:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: -1px;
+}
+
+button {
+  width: 100%;
+  padding: 11px 14px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--primary);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  filter: brightness(0.95);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+/* Cenovni markerji na zemljevidu (Leaflet divIcon je izven Angular komponent, zato so stili globalni) */
+.price-marker-wrap {
+  background: none;
+  border: 0;
+}
+
+.price-marker {
+  position: relative;
+  display: inline-block;
+  padding: 5px 9px;
+  background: #fff;
+  color: var(--primary-dark);
+  border: 2px solid var(--primary);
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 13px;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgb(15 23 42 / 0.25);
+  transform: translateX(-50%);
+  left: 50%;
+}
+
+.price-marker::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -7px;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--primary);
+  border-bottom: 0;
+}
+
+.selected .price-marker {
+  background: var(--primary);
+  color: #fff;
+}

@@ -1,0 +1,20 @@
+<main class="login">
+  <form class="card" (ngSubmit)="submit()">
+    <div class="logo">P</div>
+    <h1>Parkly</h1>
+    <p class="subtitle">Prijavi se in poišči parkirno mesto</p>
+
+    <label>
+      E-pošta
+      <input type="email" name="email" [(ngModel)]="email" placeholder="ime@primer.si" autocomplete="username" />
+    </label>
+
+    <label>
+      Geslo
+      <input type="password" name="password" [(ngModel)]="password" placeholder="••••••••" autocomplete="current-password" />
+    </label>
+
+    <button type="submit">Prijava</button>
+    <p class="hint">MVP: prijava sprejme katerikoli vnos.</p>
+  </form>
+</main>
